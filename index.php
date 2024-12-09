@@ -1,6 +1,7 @@
 <?php
 
-require_once 'Personnage.php';
+require_once 'Mage.php';
+require_once 'Chevalier.php';
 
 $merlin = new Mage('Merlin',100, 5, 80);
 $arthur = new Chevalier('Arthur',100,  80,  10, 100);
