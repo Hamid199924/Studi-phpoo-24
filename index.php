@@ -1,39 +1,16 @@
 <?php
 
-require_once 'Mage.php';
-require_once 'Chevalier.php';
+use App\Routing\Router;
 
-$merlin = new Mage('Merlin',100, 5, 80);
-$arthur = new Chevalier('Arthur',100,  80,  10, 100);
+require_once 'vendor/autoload.php';
 
-// but prochain live
-// faire que merlin puisse attaquer un autre personnage
-// si attacl merlin > defense autre perso
-// autre perso perd la diff entre attack merlin et sa défense (cas ci dessus arthur - 10 de vie donc vie = 90)
-// sinon c'est merlin qui perd la diff entre défense autre et attaque merlin
+$router = new Router($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
 
-// pensé multiplcateur attacke défense de 1.2 par level (ex: $this->level * 1.2)
+// /homepage/action -> App\Controller\HomepageController::action
+// /mon-super/action -> App\Controller\MonSuperController::action
+// /users/admin/action -> App\Controller\Users\AdminController::action
 
-/*$merlin->attack($arthur);*/
+$data = $router->render();
+$page = $data['page'];
 
-echo $merlin->getHealth()."\r\n";
-echo $arthur->getHealth()."\r\n";
-
-echo 'Merlin attaque Arthur'."\r\n";
-$merlin->attack($arthur);
-
-echo $merlin->getHealth()."\r\n";
-echo $arthur->getHealth()."\r\n";
-
-echo "\r\n";
-echo "\r\n";
-
-echo $merlin->getLevel()."\r\n";
-echo $arthur->getLevel()."\r\n";
-
-echo "\r\n";
-echo "\r\n";
-echo $merlin->getWinCombat()."\r\n";
-echo $arthur->getWinCombat()."\r\n";
-
-/*echo $personnage->getHealth()."\r\n";*/
+require_once 'views/base.php';

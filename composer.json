@@ -1,0 +1,12 @@
+{
+    "name": "hamid/studi-phpoo-24",
+    "description": "Live-3 php oo",
+    "type": "project",
+    "license": "private",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {}
+}
