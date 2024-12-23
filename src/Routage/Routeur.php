@@ -54,7 +54,7 @@ class Router
         $this->controllerName = $controllerName;
     }
 
-    public function render(): array
+    public function render(): ?array
     {
         $controllerName = $this->controllerName.'Controller';
         $controller = new $controllerName();
@@ -65,10 +65,28 @@ class Router
             } else {
                 $data = $controller->{$this->controllerMethod}();
             }
-        } elseif ('POST' === $this->requestMethod) {
 
+            $data['success_message'] = $controller->getFlash('success_message');
+            $data['error_message'] = $controller->getFlash('error_message');
+
+            return $data;
         }
 
-        return $data;
+        if ('POST' === $this->requestMethod) {
+            $postedData = $_POST;
+
+            if ($this->parameter) {
+                $controller->{$this->controllerMethod}($this->parameter, $postedData);
+            } else {
+                $controller->{$this->controllerMethod}($postedData);
+            }
+
+            if ($controller->getRedirectUri()) {
+                header('Location: '.$controller->getRedirectUri());
+            }
+        }
+
+        var_dump($_SERVER['REQUEST_METHOD']);
+        throw new \Exception('HTTP method not allowed');
     }
 }

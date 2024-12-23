@@ -12,10 +12,17 @@
             <nav>
                 <ul>
                     <li><a href="/">Accueil</a></li>
-                    <li><a href="/ma-page">Ma page</a></li>
+                    <li><a href="/article/list">Liste des articles</a></li>
                 </ul>
             </nav>
         </header>
+
+        <?php if ($data['success_message']) { ?>
+            <div style="background-color: darkgreen"><?php echo $data['success_message'] ?></div>
+        <?php } ?>
+        <?php if ($data['error_message']) { ?>
+            <div style="background-color: darkred"><?php echo $data['error_message'] ?></div>
+        <?php } ?>
 
         <main>
             <?php require_once 'pages/'.$page.'.php'; ?>
@@ -25,4 +32,3 @@
 
         </footer>
     </body>
-</html>

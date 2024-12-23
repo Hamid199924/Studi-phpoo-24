@@ -12,7 +12,7 @@ class DbConnection
 
     public function __construct()
     {
-        $this->pdo = new PDO('mysql:host=localhost;dbname=symfony_november;port=3307', 'root', 'test');
+        $this->pdo = new PDO('mysql:host=localhost;dbname=cour_bdd;port=3307', 'root', '');
     }
 
     public static function getInstance(): DbConnection
